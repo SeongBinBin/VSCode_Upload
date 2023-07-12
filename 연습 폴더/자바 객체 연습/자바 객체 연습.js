@@ -74,69 +74,71 @@
 // console.log('C group cnt ', groupC.length)
 // 1번
 
-function train_fare(train_station, latitude, longitude) {
-   this.train_station = train_station
-   this.latitude = latitude
-   this.longitude = longitude
-}
+// function train_fare(train_station, latitude, longitude) {
+//    this.train_station = train_station
+//    this.latitude = latitude
+//    this.longitude = longitude
+// }
 
-train_fare.prototype = {
-   getInfo() {
-      console.log('--- 지역 정보 ---')
-      console.log(this.train_station, '역')
-      console.log(this.train_station, '역의 위도:', this.latitude)
-      console.log(this.train_station, '역의 경도:', this.longitude)
-   },
+// train_fare.prototype = {
+//    getInfo() {
+//       console.log('--- 지역 정보 ---')
+//       console.log(this.train_station, '역')
+//       console.log(this.train_station, '역의 위도:', this.latitude)
+//       console.log(this.train_station, '역의 경도:', this.longitude)
+//    },
 
-   distance(second_city) {
-      const earth_R = 6371e3 // 지구의 반지름 (meter)
+//    distance(second_city) {
+//       const earth_R = 6371e3 // 지구의 반지름 (meter)
       
-      // 좌표를 라디안 단위로 변환
-      const φ1 = this.latitude * Math.PI / 180
-      const φ2 = second_city.latitude * Math.PI / 180
-      const Δφ = (second_city.latitude - this.latitude) * Math.PI / 180
-      const Δλ = (second_city.longitude - this.longitude) * Math.PI / 180
+//       // 좌표를 라디안 단위로 변환
+//       const φ1 = this.latitude * Math.PI / 180
+//       const φ2 = second_city.latitude * Math.PI / 180
+//       const Δφ = (second_city.latitude - this.latitude) * Math.PI / 180
+//       const Δλ = (second_city.longitude - this.longitude) * Math.PI / 180
       
-      const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-         Math.cos(φ1) * Math.cos(φ2) *
-         Math.sin(Δλ / 2) * Math.sin(Δλ / 2)
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+//       const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+//          Math.cos(φ1) * Math.cos(φ2) *
+//          Math.sin(Δλ / 2) * Math.sin(Δλ / 2)
+//       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
       
-      const d = Math.round(earth_R * (c / 10)) // meter
+//       const d = Math.round(earth_R * (c / 10)) // meter
       
-      return d
-   }
-}
+//       return d
+//    }
+// }
 
-const seoul = new train_fare(
-   '서울',
-   37.56654,
-   126.97796
-)
-const daejeon = new train_fare(
-   '대전',
-   36.33251,
-   127.43421
-)
-const daegu = new train_fare(
-   '대구',
-   35.88049,
-   128.62837
-)
-const busan = new train_fare(
-   '부산',
-   35.11661,
-   129.04009
-)
+// const seoul = new train_fare(
+//    '서울',
+//    37.56654,
+//    126.97796
+// )
+// const daejeon = new train_fare(
+//    '대전',
+//    36.33251,
+//    127.43421
+// )
+// const daegu = new train_fare(
+//    '대구',
+//    35.88049,
+//    128.62837
+// )
+// const busan = new train_fare(
+//    '부산',
+//    35.11661,
+//    129.04009
+// )
 
-// seoul.getInfo()
-// daejeon.getInfo()
-// busan.getInfo()
+// // seoul.getInfo()
+// // daejeon.getInfo()
+// // busan.getInfo()
 
 
-const result = seoul.distance(daejeon)
-console.log('서울역 - 대전역 =', result)
-const result2 = daejeon.distance(daegu)
-console.log('대전역 - 대구역 =', result2)
-const result3 = daegu.distance(busan)
-console.log('대구역 - 부산역 =', result3)
+// const result = seoul.distance(daejeon)
+// console.log('서울역 - 대전역 =', result)
+// const result2 = daejeon.distance(daegu)
+// console.log('대전역 - 대구역 =', result2)
+// const result3 = daegu.distance(busan)
+// console.log('대구역 - 부산역 =', result3)
+// 2번
+
