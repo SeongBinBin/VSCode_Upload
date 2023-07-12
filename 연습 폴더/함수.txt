@@ -1,0 +1,36 @@
+// // 생성자 함수 : 객체를 생성하는 함수
+// function Music(){
+//    // 객체를 생성하고 반환
+//    this.name = '보고 싶다'
+//    this.artist = '김범수'
+//    this.release = '2002-12-17'
+//    console.log(this)
+
+//    const music = {
+//       name: '금요일에 만나요',
+//       artist: 'IU',
+//       release: '2013-12-20',
+//       // 메서드
+//       info: function() {
+//          console.log(this) // 화살표 함수 -> 윈도우 객체
+//          console.log(`${music.name} - ${this.artist}는 ${this.release}에 발매되었다.`)
+//       }
+//    }
+//    return music
+// }
+
+// const music = new Music() // music : 객체(인스턴스)
+// music.info()
+
+
+// 함수선언방식(function) : this 값이 내부에 존재함
+// this : 객체가 있다면 객체 자체 / 객체가 없으면 윈도우 객체
+
+// 화살표함수 : this 값이 내부에 존재하지 않음
+//              상위에 있는 this 값을 가져옴
+// this : 해당 객체가 아니라 외부에 있는 윈도우객체이거나 생성자 함수
+
+function add(){
+   console.log(this)
+}
+add()

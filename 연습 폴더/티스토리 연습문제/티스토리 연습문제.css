@@ -1,0 +1,80 @@
+.margin{
+   width: 50%;
+   margin: auto;
+   margin-top: 50px;
+
+   letter-spacing: -1.8px;
+   font-weight: 300;
+   color: #909090;
+   font-size: 54px;
+   white-space:nowrap;
+}
+
+.margin h1{
+   font-size: 20px;
+   color: #000;
+}
+
+.margin a{
+   
+   text-decoration: none;
+   color: #909090;
+}
+
+.margin a:hover{
+   color: #000;
+}
+
+.margin a strong{
+   color: #000;
+   position: relative;
+}
+
+/* 
+a strong::after{
+   content:"01";
+   position: relative;
+   bottom: 35px;
+   font-size: 13px;
+   color: #909090;
+   
+} */
+
+
+.margin a sup{
+   font-size: 13px;
+   vertical-align: text-top;
+
+   position: relative;
+   top: 8px;
+
+   line-height: 100%; /*페이지가 늘어져도 첨자가 밑으로 딸려가지 않게*/
+
+   letter-spacing: 0px;
+}
+
+.margin a strong::before{
+   position: absolute;
+   bottom: 7px;
+   z-index: -1;
+   content: '';
+   width: 0%;
+   height: 10px;
+   background-color: #f54;
+   transition: .3s; /*한번에 나타나지않고 스르륵 나타나게*/
+
+}
+
+a:hover strong::before{
+   /*a 태그 위치 아무곳에 호버링해도 강조되게 하고 싶을 때*/
+   width: 100%;
+}
+
+/* 강조한 부분에 호버링 했을때만 강조되게 하고 싶을 때
+.margin a strong:hover::before{
+   
+   width: 100%;
+}
+*/
+
+

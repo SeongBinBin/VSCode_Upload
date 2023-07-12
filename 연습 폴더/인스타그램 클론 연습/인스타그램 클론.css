@@ -1,0 +1,258 @@
+*{
+   margin: 0; padding: 0;
+   box-sizing: border-box;
+   font-size: 1rem
+}
+
+html, body{
+   width: 100%;
+   height: 100%;
+}
+
+section{
+   position: relative; 
+   min-height: 100%;  
+}
+
+.main_title{
+   width: 1000px;
+   margin: auto;
+}
+
+header{
+   position: fixed;
+   background-color: #fff;
+   width: 100%;
+   height: 60px;
+   top: 0;
+   z-index: 1;
+   border-bottom: .1px solid rgba(220, 220, 220, .7);
+}
+
+.top_title{
+   display: flex;
+   align-items: center;
+   width: 900px;
+   height: 60px;
+   margin: auto;
+   justify-content: space-between;
+}
+
+.logo h1{
+   font-family: 'Lobster', cursive;
+   font-size: 1.5rem;
+   font-weight: lighter;
+   cursor: pointer;
+}
+
+.search_bar{
+   width: 250px;
+   height: 36px;
+   border-radius: 10px;
+   background-color: rgba(128, 128, 128, 0.13);
+   color: rgba(133, 133, 133, 0.979);
+   border: 0;
+}
+
+.material-symbols-outlined{
+   position: absolute;
+   color: rgba(133, 133, 133, 0.979);
+   margin-left: -240px;
+   padding-top: 5px;
+}
+
+.sign_up{
+   background-color: #3578E5;
+   border: 0;
+   color: #fff;
+   border-radius: 10px;
+   padding: 7px 13px;
+   cursor: pointer;
+   margin-right: 10px;
+}
+
+.sign_in{
+   border: 0;
+   background-color: #fff;
+   color: #3578E5;
+   font-weight: bold;
+   cursor: pointer;
+}
+
+.sign_up:hover{
+   background-color: #2a59a5;
+}
+
+.sign_in:hover{
+   color: #2a59a5;
+}
+
+.title{
+   margin-bottom: 44px;
+   display: flex;
+   margin-top: 100px;
+   border-bottom: .1px solid rgba(220, 220, 220, .7);
+   width: 1000px;
+   margin-left: auto; margin-right: auto;
+}
+
+.head_img{
+   flex-grow: 1;
+   text-align: center;
+   margin-bottom: 10px;
+}
+
+.head_inform{
+   flex-grow: 2;
+   width: 300px;
+}
+
+.head_img img{
+   width: 150px;
+   height: 150px;
+   border-radius: 50%;
+}
+
+.head_inform button{
+   cursor: pointer;
+   padding: 5px 25px;
+   border-radius: 10px;
+   border: 0;
+   font-weight: bold;
+   margin-left: 180px;
+}
+
+.link p{
+   display: inline-block;
+   margin-top: 25px;
+   margin-right: 40px;
+   margin-bottom: 25px;
+   cursor: pointer;
+   font-size: 0.9rem;
+}
+
+.name{
+   font-family: 'Open Sans', sans-serif;
+   font-size: 1.4rem;
+   margin-bottom: -30px;
+}
+
+.short{
+   font-family: 'Pacifico', cursive;
+   font-size: 1rem;
+}
+
+.container{
+   width: 50%;
+   margin-left: auto; margin-right: auto;
+}
+
+.item{
+   display: flex;
+   height: 293px;
+   justify-content: space-evenly;
+   flex-wrap: wrap;
+}
+
+.item img{
+   width: 293px;
+   height: 293px;
+   margin-bottom: 30px;
+   border: 1px solid rgb(220, 220, 220);
+   background-color: #fff;
+   cursor: pointer;
+}
+
+.test{
+   position: relative;
+}
+
+.test_text{
+   text-align: center;
+   position: absolute;
+   top: 50%; left: 50%;
+   transform: translate(-50%, -50%);
+   color: #fff;
+   visibility: hidden;
+   cursor: pointer;
+}
+
+.test_text p, ri-heart-fill ,ri-chat-3-fill{
+   font-size: 1.3rem;
+}
+
+.test:hover .test_img{
+   filter: brightness(0.5);
+}
+
+.test_img:hover ~ .test_text, .test_text:hover{
+   visibility: visible;
+}
+
+footer{
+   width: 920px;
+   height: 260px;
+   border: .1px solid rgba(220, 220, 220, .7);
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   position : relative;
+   transform : translateY(255%);
+   margin-left: auto; margin-right: auto;
+   flex-shrink: 0;
+   flex-direction: column;
+   
+}
+
+footer > div{
+   position: relative;
+   width: 100%;
+   margin-bottom: 10px;
+   left: 30px;
+   top: 7px;
+}
+
+.bottom_section{
+   position: relative;
+   width: 100%;
+   text-align: center;
+   left: 0;
+   padding: 0 15px;
+   overflow: auto;      /*가로 슬라이드*/
+   white-space: nowrap; /*가로 슬라이드*/
+
+   /* overflow-x: hidden; /*슬라이드 바 없애기*/  
+}
+
+footer .user{
+   /* width: 135px; */
+   flex-basis: 135px;
+   height: 200px;
+   border: .1px solid rgba(220, 220, 220, .7);
+   padding: 20px;
+   display: inline-block;
+   
+   margin-right: 20px;
+}
+
+footer .user img{
+   width: 70px;
+   height: 70px;
+   border-radius: 50%;
+   margin-left: 10px;   
+}
+
+footer .user p{
+   text-align: center;
+   margin-bottom: 3px;
+}
+
+footer .user button{
+   text-align: center;
+   margin-top: 10px;
+   margin-left: 13px;
+   cursor: pointer;
+   border-radius: 10px;
+   border: 0;
+   padding: 5px 10px;
+}

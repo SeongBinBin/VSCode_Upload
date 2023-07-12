@@ -1,0 +1,122 @@
+*{
+   box-sizing: border-box;
+   font-size: 1em;
+   width: 100%;
+}
+
+body{
+   /* height: 100vh; width: 100vw; */
+   background-image: url(http://tfgms.com/sandbox/dailyui/bg-1.jpg);
+   font-size: 18px;
+   font-family: 'Raleway', sans-serif;
+}
+
+label{
+   max-width: 100%;
+   font-weight: 700;
+}
+
+.form_design{
+   margin: auto;
+   padding: 36px;
+   max-width: 480px;
+   border-radius: 0.5em;
+   background-color: rgba(255, 255, 255, 0.7);
+   transform: translate(-50%, -50%);
+   position: absolute;
+   top: 50%;
+   left: 50%;
+
+   backdrop-filter: blur(5px);
+}
+
+.top_design{
+   text-align: center;
+}
+
+.top_design img{
+   height: auto;
+   margin: 0 auto;
+   max-width: 240px;
+   width: 100%;
+}
+
+.top_design h1{
+   font-family: 'Cookie', cursive;
+   font-size: 3em;
+   font-weight: 500;
+   margin-top: 30px;
+}
+
+form label{
+   border-bottom: 1px solid #333;
+   font-size: 1.25em;
+   display: block;
+   margin-bottom: 10px;
+}
+
+form label input{
+   background: none;
+   border: none;
+   width: 100%;
+   outline:none;
+   margin-left: 5px;
+}
+
+.label_text{
+   display: block;
+   font-size: 0.5em;
+   font-weight: bold;
+   padding-left: 0.7em;
+}
+
+.first_name{
+   width: 50%;
+   float: left;
+   border-right: 1px solid #333;
+}
+
+.last_name{
+   width: 50%;
+   float: right;
+}
+
+.checkbox{
+   border-bottom: 0;
+   display: block;
+   margin-top: 20px;
+   margin-bottom: 20px;
+}
+
+.checkbox input{
+   position: absolute;
+   margin-left: -130px;
+}
+
+.checkbox span{
+   position: absolute;
+   font-size: 0.5em;
+   margin-top: 2px;
+   margin-left: 125px
+}
+
+.button{
+   text-align: center;
+   border-radius: 0;
+   border: 1px solid #333;
+   background: rgba(255, 255, 255, 0.3);
+   padding: 0.5em 0.5em;
+   display: block;
+   margin: auto;
+   margin-top: 50px;
+   cursor: pointer;
+   font-weight: 100;
+   max-width: 120px;
+   
+}
+
+.button:hover{
+   background: #333;
+   outline: none;
+   color: #fff;
+}
