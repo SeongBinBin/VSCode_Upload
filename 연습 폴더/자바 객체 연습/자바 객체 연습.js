@@ -142,3 +142,8 @@
 // console.log('대구역 - 부산역 =', result3)
 // 2번
 
+const hairColors = ['black', 'brown', 'yellow', 'white', 'gold']
+const hairTypes = ['curly', 'straight', 'wavy', 'coily']
+const glasses = [true, false]
+const heights = [150, 160, 170, 180, 190, 200]
+const weights = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150]
