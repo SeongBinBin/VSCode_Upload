@@ -68,132 +68,145 @@
 // 1번
 
 
-// .Button{
-//    &:focus{
-//       +.Modal{
-//          display: block;
+.Button{
+   &:focus{
+      +.Modal{
+         display: block;
          
-//       }
-//    }
+      }
+   }
+   & + .Modal{
+      display: none;
+   }
+}
+// .Button + .Modal{
+//    display: block;
 // }
 
-// .Modal{
-//    display: none;
-//    width: 500px;
-//    margin: 100px auto;
-//    border: 1px solid tan;
-//    padding: 10px;
-//    text-align: center;
+.Modal{
+   // display: none;
+   width: 500px;
+   margin: 100px auto;
+   border: 1px solid tan;
+   padding: 10px;
+   text-align: center;
 
-//    .header{
-//       padding: 5px;
-//       font-size: 1.2rem;
-//       font-weight: bold;
-//    }
-//    .body{
-//       padding: 5px;
-//       font-size: 0.9rem;
-//       margin: 20px;
-//       input{
-//          width: 60%;
-//          height: 30px;
-//          border: 1px solid lightgray;
-//          border-radius: 5px;
-//          margin-bottom: 10px;
-//       }
-//    }
-//    .footer{
-//       display: flex;
-//       justify-content: flex-end;
-//       align-items: center;
-//    }
 
-//    .Button{
-//       &.blue{
-//          &:active{
-//             background-color: blue;
-               
+   .header{
+      padding: 5px;
+      font-size: 1.2rem;
+      font-weight: bold;
+   }
+   .body{
+      padding: 5px;
+      font-size: 0.9rem;
+      margin: 20px;
+      input{
+         width: 60%;
+         height: 30px;
+         border: 1px solid lightgray;
+         border-radius: 5px;
+         margin-bottom: 10px;
+
+         &:active{
+            .Modal{
+               display: block;
+            }
             
-//          }
-//       }
-//    } 
+         }
+      }
+   }
+   .footer{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+   }
+
+   .Button{
+      &.blue{
+         &:active{
+            background-color: blue;   
+            display: block;     
+         }
+      }
+   } 
    
-// }
+}
 // 2번
 
 
-@mixin WB($width, $height){
-   width: $width;
-   height: $height;
-}
-@mixin SWA($font-size, $font-weight, $text-align){
-   font-size: $font-size;
-   font-weight: $font-weight;
-   text-align: $text-align;
-}
+// @mixin WB($width, $height){
+//    width: $width;
+//    height: $height;
+// }
+// @mixin SWA($font-size, $font-weight, $text-align){
+//    font-size: $font-size;
+//    font-weight: $font-weight;
+//    text-align: $text-align;
+// }
 
-.header{
-   @include WB(100%, 70px);
-   position: fixed;
-   left: 0;
-   top: 0;
-   right: 0;
-   box-shadow: 1px 1px 5px 5px darkgray;
-   background: white;
-   z-index: 1;
+// .header{
+//    @include WB(100%, 70px);
+//    position: fixed;
+//    left: 0;
+//    top: 0;
+//    right: 0;
+//    box-shadow: 1px 1px 5px 5px darkgray;
+//    background: white;
+//    z-index: 1;
 
-   display: flex;
-   justify-content: flex-end;
-   align-items: center;
+//    display: flex;
+//    justify-content: flex-end;
+//    align-items: center;
 
-   .sort-btns{
-      all: unset;      
-      @include WB(100px, 50px);
-      @include SWA(1rem, bold, center);
-      background: peru;
-      border-radius: 10px;
-      cursor: pointer;
-      color: white;
-      margin-right: 10px;
+//    .sort-btns{
+//       all: unset;      
+//       @include WB(100px, 50px);
+//       @include SWA(1rem, bold, center);
+//       background: peru;
+//       border-radius: 10px;
+//       cursor: pointer;
+//       color: white;
+//       margin-right: 10px;
 
-      &:hover{
-         opacity: 0.8;
-      }
-   }
-}
-.root{
-   width: 60%;
-   margin: 100px auto;
+//       &:hover{
+//          opacity: 0.8;
+//       }
+//    }
+// }
+// .root{
+//    width: 60%;
+//    margin: 100px auto;
 
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   align-items: center;
+//    display: flex;
+//    flex-wrap: wrap;
+//    justify-content: center;
+//    align-items: center;
 
-   .product{
-      flex: 200px;
-      height: 500px;
-      box-shadow: 1px 1px 5px 5px peru;
-      color: white;
-      background: peru;
-      margin: 10px;
-      overflow: hidden;
+//    .product{
+//       flex: 200px;
+//       height: 500px;
+//       box-shadow: 1px 1px 5px 5px peru;
+//       color: white;
+//       background: peru;
+//       margin: 10px;
+//       overflow: hidden;
 
-      &-img{
-         @include WB(100%, 180px);
-         overflow: hidden;
+//       &-img{
+//          @include WB(100%, 180px);
+//          overflow: hidden;
 
-         img{
-            @include WB(100%, 100%);
-         }
-      }
-      &-name{
-         @include SWA(1.1rem, bold, center);
-      }
-      &-description{
-         @include SWA(0.9rem, 400, center);
-         margin-top: 15px;
-      }
-   }
-}
+//          img{
+//             @include WB(100%, 100%);
+//          }
+//       }
+//       &-name{
+//          @include SWA(1.1rem, bold, center);
+//       }
+//       &-description{
+//          @include SWA(0.9rem, 400, center);
+//          margin-top: 15px;
+//       }
+//    }
+// }
 // 3번

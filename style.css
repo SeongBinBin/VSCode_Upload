@@ -1,68 +1,44 @@
-.header {
-  width: 100%;
-  height: 70px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  box-shadow: 1px 1px 5px 5px darkgray;
-  background: white;
-  z-index: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-.header .sort-btns {
-  all: unset;
-  width: 100px;
-  height: 50px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
-  background: peru;
-  border-radius: 10px;
-  cursor: pointer;
-  color: white;
-  margin-right: 10px;
-}
-.header .sort-btns:hover {
-  opacity: 0.8;
+body {
+  background-image: url(https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?cs=srgb&dl=pexels-pixabay-531880.jpg&fm=jpg);
+  height: 300vh;
 }
 
-.root {
-  width: 60%;
-  margin: 100px auto;
+.container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  width: 80%;
+  height: 200px;
+  overflow-x: auto;
+  margin: 100px auto;
 }
-.root .product {
-  flex: 200px;
-  height: 500px;
-  box-shadow: 1px 1px 5px 5px peru;
-  color: white;
-  background: peru;
-  margin: 10px;
-  overflow: hidden;
-}
-.root .product-img {
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
-}
-.root .product-img img {
-  width: 100%;
+.container .item {
+  width: 200px;
   height: 100%;
-}
-.root .product-name {
-  font-size: 1.1rem;
-  font-weight: bold;
+  margin-right: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  flex: 1 0 auto;
   text-align: center;
+  line-height: 200px;
+  font-size: 5rem;
+  color: white;
+  cursor: pointer;
 }
-.root .product-description {
-  font-size: 0.9rem;
-  font-weight: 400;
-  text-align: center;
-  margin-top: 15px;
+.container .item:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.active {
+  transform: scale(1.005);
 }/*# sourceMappingURL=style.css.map */

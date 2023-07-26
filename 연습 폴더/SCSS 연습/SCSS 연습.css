@@ -1,68 +1,43 @@
-.header {
-  width: 100%;
-  height: 70px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  box-shadow: 1px 1px 5px 5px darkgray;
-  background: white;
-  z-index: 1;
+.Button:focus + .Modal {
+  display: block;
+}
+.Button + .Modal {
+  display: none;
+}
+
+.Modal {
+  width: 500px;
+  margin: 100px auto;
+  border: 1px solid tan;
+  padding: 10px;
+  text-align: center;
+}
+.Modal .header {
+  padding: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.Modal .body {
+  padding: 5px;
+  font-size: 0.9rem;
+  margin: 20px;
+}
+.Modal .body input {
+  width: 60%;
+  height: 30px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.Modal .body input:active .Modal {
+  display: block;
+}
+.Modal .footer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-.header .sort-btns {
-  all: unset;
-  width: 100px;
-  height: 50px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
-  background: peru;
-  border-radius: 10px;
-  cursor: pointer;
-  color: white;
-  margin-right: 10px;
-}
-.header .sort-btns:hover {
-  opacity: 0.8;
-}
-
-.root {
-  width: 60%;
-  margin: 100px auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-.root .product {
-  flex: 200px;
-  height: 500px;
-  box-shadow: 1px 1px 5px 5px peru;
-  color: white;
-  background: peru;
-  margin: 10px;
-  overflow: hidden;
-}
-.root .product-img {
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
-}
-.root .product-img img {
-  width: 100%;
-  height: 100%;
-}
-.root .product-name {
-  font-size: 1.1rem;
-  font-weight: bold;
-  text-align: center;
-}
-.root .product-description {
-  font-size: 0.9rem;
-  font-weight: 400;
-  text-align: center;
-  margin-top: 15px;
+.Modal .Button.blue:active {
+  background-color: blue;
+  display: block;
 }/*# sourceMappingURL=SCSS 연습.css.map */

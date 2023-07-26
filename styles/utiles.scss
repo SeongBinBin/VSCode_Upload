@@ -1,0 +1,19 @@
+$orange: orange;
+$red: red;
+$blue: blue;
+$yellow: yellow;
+$name-color: white;
+
+$default-width: 100px;
+$default-height: 50px;
+$default-font-size: 20px;
+
+// @mixin border($style){
+//    border-style: $style;
+// }
+@mixin captionStyle($bg, $tc, $bt){
+   background-color: $bg;
+   color: $tc;
+   border-style: $bt;
+   // @include border($bt);
+}
