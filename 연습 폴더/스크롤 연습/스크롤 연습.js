@@ -94,6 +94,9 @@ scrollContainer.addEventListener('mousemove', e => {
 fetch('https://picsum.photos/v2/list?page=2&limit=100')
   .then(response => response.json())
   .then(data => {
+      data.sort((a, b) => a.author.localeCompare(b.author))
+    
+      // API로드 시간 측정 및 활용
       const downloadUrls = data.map(item => item.download_url)
       const begin = new Date().getMilliseconds()
       const end = new Date().getMilliseconds()
@@ -106,23 +109,42 @@ fetch('https://picsum.photos/v2/list?page=2&limit=100')
         apiLoad.classList.add('hide')
       }, timeCheck)
       
-    for(let i = 0; i < 15; i++){
+    for(let i = 0; i < downloadUrls.length; i++){
       changeImage(i, downloadUrls[i])
       changeText(i, authors[i])
+
+      cardChangeImage(i, downloadUrls[i])
+      cardChangeText(i, authors[i])
     }
+   
   })
+  
 
-
-
-function changeImage(indexNum, arrayNum){
-  const imageElement = document.getElementsByClassName('item_img')[indexNum]
-  imageElement.src = arrayNum
-}
+  function changeImage(indexNum, arrayNum) {
+    const imageElement = document.getElementsByClassName('item_img')[indexNum]
+    if (imageElement){
+      imageElement.src = arrayNum
+    }
+  }
+  
+  function cardChangeImage(indexNum, arrayNum) {
+    const imageElement = document.getElementsByClassName('card_img')[indexNum]
+    if (imageElement){
+      imageElement.src = arrayNum
+    }
+  }
 
 function changeText(i, author){
   const textElement = document.getElementsByClassName('author')[i]
-  textElement.textContent = author
-  // console.log(textElement)
+  if(textElement){
+    textElement.textContent = author
+  }
+}
+function cardChangeText(i, author){
+  const textElement = document.getElementsByClassName('card_text')[i]
+  if(textElement){
+    textElement.textContent = author
+  }
 }
 
 const choseItem = document.querySelectorAll('.item')
@@ -137,10 +159,11 @@ function copyItem(e){
   
   copyImage.src = target.src
   copyAuthor.innerText = authorName
-  popupAuthor.innerText = `현재 ${authorName}의 작품을 보고 계십니다.`
-  console.log(textElement)
+  popupAuthor.innerText = `현재 ${authorName}의 
+                           작품을 보고 계십니다.`
+  // console.log(textElement)
 }
-console.log(popupAuthor)
+// console.log(popupAuthor)
 
 for(let item of choseItem){
   item.addEventListener('click', copyItem)
@@ -165,19 +188,22 @@ const darkOn = document.querySelector('.dark_on')
 const darkOff = document.querySelector('.dark_off')
 const modalInformation = document.querySelector('.modal_information')
 const darkInformation = document.querySelector('.dark_information')
-const menu = document.querySelector('.menu')
+const menuHovers = document.querySelectorAll('.menu_hover')
 
 function changeDarkMode(){
   darkOn.classList.remove('show'); darkOn.classList.add('hide')
   
   darkOff.classList.remove('hide'); darkOff.classList.add('show')
 
-  navBar.classList.add('dark'); document.body.classList.add('dark')
+  navBar.classList.add('gray'); document.body.classList.add('dark')
 
+  modalInformation.classList.add('gray')
+  darkInformation.classList.add('gray')
+  hideBar.classList.add('dark')
 
-  menu.classList.add('dark')
-  modalInformation.classList.add('dark')
-  darkInformation.classList.add('dark')
+  for(let menu of menuHovers){
+    menu.classList.add('gray')
+  }
 }
 
 function changeLightMode(){
@@ -185,12 +211,15 @@ function changeLightMode(){
 
   darkOn.classList.remove('hide'); darkOn.classList.add('show')
 
-  navBar.classList.remove('dark'); document.body.classList.remove('dark')
+  navBar.classList.remove('gray'); document.body.classList.remove('dark')
 
+  modalInformation.classList.remove('gray')
+  darkInformation.classList.remove('gray')
+  hideBar.classList.remove('dark')
 
-  menu.classList.remove('dark')
-  modalInformation.classList.remove('dark')
-  darkInformation.classList.remove('dark')
+  for(let menu of menuHovers){
+    menu.classList.remove('gray')
+  }
 }
 darkOn.addEventListener('click', changeDarkMode)
 darkOff.addEventListener('click', changeLightMode)
@@ -206,8 +235,90 @@ function popupopen(){
 copyImage.addEventListener('click', popupopen)
 closePopup.addEventListener('click', popupclose)
 
-// const informationSection = document.querySelector('.img_section')
-// function showMore(){
-//   informationSection.classList.add('hide')
-// }
-// scrollContainer.addEventListener('click', showMore)
+
+// 애니메이션
+const animationSection = document.querySelectorAll('.card_component')
+const header = document.querySelector('header')
+
+window.addEventListener('scroll', (event) => {
+  animationSection.forEach(section => {
+    if((window.scrollY >= 1200)){
+      const cards = section.querySelectorAll('.card')
+      cards.forEach(card => card.classList.add('animation_show'))
+    }else if(window.scrollY <= 200){
+      const cards = section.querySelectorAll('.card')
+      cards.forEach(card => card.classList.remove('animation_show'))
+    }
+
+  })
+  
+})
+
+// 무한 스크롤
+const cardComponent = document.querySelector('.card_component')
+const card = document.querySelector('.card')
+
+const scroller = new Scroller(false)
+
+window.addEventListener('scroll', (event) => {
+  const scrollHeight = Math.max(
+    document.body.scrollHeight, document.documentElement.scrollHeight,
+    document.body.offsetHeight, document.documentElement.offsetHeight,
+    document.body.clientHeight, document.documentElement.clientHeight
+  )
+
+  if(Math.abs(scroller.getScrollPosition() + document.documentElement.clientHeight - scrollHeight) < 100){
+    // console.log('scroll is bottom')
+    cardComponent.innerHTML += getCardList(20)
+  }
+})
+
+function getCardList(num){
+	let cardList = ''
+	for(let i = 0; i < num; i++){
+    console.log('scroll is bottom')
+    cardList += `
+    <div class="card up"> <img src="" class="card_img" alt=""> <div class="card_text"></div> </div>
+    <div class="card down"> <img src="" class="card_img" alt=""> <div class="card_text"></div> </div>
+    <div class="card up"> <img src="" class="card_img" alt=""> <div class="card_text"></div> </div>
+    `
+  }
+  return cardList
+}
+
+// 새로고침 시 스크롤 맨 위로
+window.onload = function(){
+  setTimeout(function(){
+    scrollTo(0, 0)
+  }, 100)
+}
+
+const clickItems = document.querySelectorAll('.item')
+function moveScroll(){
+  window.scrollTo({
+    top: 900,
+    // left: 0,
+    behavior: 'smooth'
+  })  
+}
+clickItems.forEach(item => {
+  item.addEventListener('click', moveScroll)
+})
+
+
+
+// 검색
+function filter(){
+  const value = document.getElementById('value').value.toUpperCase()
+  const item = document.getElementsByClassName('item')
+
+  for(i = 0; i < item.length; i++){
+    author = item[i].getElementsByClassName('author')
+    if(author[0].innerHTML.toUpperCase().indexOf(value) > -1){
+      item[i].style.display = 'block'
+    }else{
+      item[i].style.display = 'none'
+    }
+  }
+  console.log(value)
+}
