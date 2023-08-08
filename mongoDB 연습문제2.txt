@@ -1,0 +1,31 @@
+연습문제1
+db.inventory.find({item: "postcard"})
+db.inventory.find({item: {$all: ["postcard"]}})
+db.inventory.find( {tags: ["blue"]})
+db.inventory.find( {"dim_cm.0": {$lt: 13}})
+db.inventory.find({"tags": {$size: 1}})
+
+연습문제2
+db.inventory.find({item: "paper"})
+db.inventory.find({item: {$all: ["paper"]}})
+db.inventory.find( {tags: ["red", "blank", "plain"]})
+db.inventory.find({"tags": {$size: 3}})
+
+연습문제3
+db.inventory.find({"instock.qty": {$gte: 40}})
+db.inventory.find({item: {$regex: /r$/}})
+db.inventory.find({$and: [ {"instock.qty": {$gte: 40}}, {"instock.warehouse": "A"}]})
+db.inventory.find({"instock.1.warehouse": "B"})
+
+연습문제4
+db.inventory.find({item: {$nin: [/^p/]}})
+db.inventory.find({$and: [ {"instock.qty": {$lte: 5}}, {"instock.warehouse": "C"}]})
+db.inventory.find({"instock.warehouse": {$nin: ["B"]}})
+
+------------------------------------------------------------------------------------------------
+
+db.records.aggregate( [ { $group: { _id: { ItemType: "$Item Type" }, totalSold: { $sum: "$Units Sold" }, totalPrice: { $sum: "$Unit Price" }, totalCost: { $sum: "$Unit Cost" }, count: {$sum: 1 } } }])
+
+db.records.aggregate( [ { $group: { _id: { SalesChannel: "$Sales Channel" }, totalSold: { $sum: "$Units Sold" }, totalPrice: { $sum: "$Unit Price" }, totalCost: { $sum: "$Unit Cost" }, count: {$sum: 1 } } }])
+
+db.records.aggregate( [ { $group: { _id: { year: {$year: {$toDate: "$Order Date"}} }, totalSold: { $sum: "$Units Sold" }, totalPrice: { $sum: {$round:  ["$Unit Price", 0]} }, totalCost: { $sum: {$round: ["$Unit Cost", 0]} }, count: {$sum: 1 } }}, {$sort: {"_id": 1}} ])

@@ -1,0 +1,25 @@
+[
+   { "item": "journal", "qty": 25, "size": { "h": 14, "w": 21, "uom": "cm" }, "status": "A" },
+   { "item": "notebook", "qty": 50, "size": { "h": 8.5, "w": 11, "uom": "in" }, "status": "A" },
+   { "item": "paper", "qty": 100, "size": { "h": 8.5, "w": 11, "uom": "in" }, "status": "D" },
+   { "item": "planner", "qty": 75, "size": { "h": 22.85, "w": 30, "uom": "cm" }, "status": "D" },
+   { "item": "postcard", "qty": 45, "size": { "h": 10, "w": 15.25, "uom": "cm" }, "status": "A" }
+]
+
+연습과제1
+db.inventory.updateMany( { status: "D" }, [ { $set: { status: ["$size.h", "$size.w"] } }])
+
+연습과제2
+db.inventory.updateMany( { status: "A", qty: { $lt: 50 } }, { $set: { "size.h": "big" } })
+
+연습과제3
+db.inventory.updateMany( { qty: { $eq: 100 } }, { $set: { item: "아이템" } })
+
+연습과제4
+db.inventory.updateMany( {}, { $push: { users: { $each: ["victoria", "hanna", "danniel"] } } })
+
+연습과제5
+db.inventory.updateMany( { $and: [{ "size.w": { $gt: 11 } }, { "size.w": { $lt: 30 } }] }, { $push: { users: { $each: ["영희", "철수"] } } })
+
+연습과제6
+db.inventory.updateMany( { $or: [{ item: "journal" }, { item: "notebook" }] }, { $unset: { status: 1 } })
