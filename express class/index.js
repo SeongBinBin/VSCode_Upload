@@ -191,9 +191,9 @@ app.delete('/user/:name/books/:bookname', function (req, res, next) {
 
         if (bookIndex !== -1) {
             user.book.splice(bookIndex, 1)
-            res.send(`책 "${Bookname}"이 삭제되었습니다.`)
+            res.send(`${Bookname}가 삭제되었습니다.`)
         } else {
-            res.send(`"${Bookname}"은(는) 존재하지 않는 책입니다.`)
+            res.send(`${Bookname}은(는) 존재하지 않는 책입니다.`)
         }
     }
 
