@@ -6,9 +6,9 @@ const { Types: {ObjectId} } = Schema
 
 const bookSchema = new Schema({
     author: {
-        type: String,
+        type: ObjectId,
         required: true,
-        trim: true,
+        ref: 'User'
     },
     title: {
         type: String,
@@ -22,7 +22,7 @@ const bookSchema = new Schema({
     },
     loanStatus: {
         type: Boolean,
-        required: true,
+        default: true,
     },
     loanDate: {
         type: String,
@@ -45,11 +45,11 @@ const bookSchema = new Schema({
 const Book = mongoose.model('Book', bookSchema)
 module.exports = Book
 
-const book = new Book({
-    author: '홍길동',
-    title: '해리포터',
-    category: '판타지',
-    loanStatus: false,
-})
-book.save()
-.then(() => console.log('add book information'))
+// const book = new Book({
+//     author: '홍길동',
+//     title: '해리포터',
+//     category: '판타지',
+//     loanStatus: false,
+// })
+// book.save()
+// .then(() => console.log('add book information'))

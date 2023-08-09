@@ -1,12 +1,3 @@
-const express = require('express')  // 모듈 임포트
-const app = express()
-const router = express.Router()
-const port = 3000   // 서버 포트
-const mongoose = require('mongoose')
-const moment = require('moment')
-// const book = require('./src/models/Book')
-
-
 // // 미들웨어 (middleware)
 // // 미들웨어 중에서 라우트 경로가 포함된 미들웨어 -> 라우트 핸들러 함수
 // // '/' -> 라우트(route)
@@ -84,21 +75,41 @@ const moment = require('moment')
 
 // ------------------------------------------------------
 
-var CONNECT_URL = 'mongodb://127.0.0.1:27017/SeongBinBin'
-mongoose.connect(CONNECT_URL)
+const express = require('express')  // 모듈 임포트
+const app = express()
+const router = express.Router()
+const port = 3000   // 서버 포트
+var cors = require('cors')
+var logger = require('morgan')
+const mongoose = require('mongoose')
+const moment = require('moment')
+var axios = require('axios')
+var usersRouter = require('./src/routes/users')
+var booksRouter = require('./src/routes/books')
+var config = require('./config')
 
-const books = [
-    {name: "홍길동", book: []},
-    {name: "김영희", book: []},
-    {name: "김철수", book: []}
-]
-
-const Logger = function(req, res ,next){
-    req.requestTime = new Date()
-    console.log(`요청 시각 : ${req.requestTime}`)
-    next()
+var corsOptions = { // CORS 옵션
+    origin: 'http://127.0.0.1:5500',    // 해당 URL 주소만 요청을 허락함 (화이트리스트)
+    credentials: true // 사용자 인증이 필요한 리소스를 요청할 수 있도록 허용함
 }
-app.use(Logger)
+
+mongoose.connect(config.MONGODB_URL)
+.then(() => console.log('mongodb connected ... '))
+.catch(e => console.log(`failed to connect mongodb: ${e}`))
+
+app.use(cors(corsOptions))  // CORS 설정
+app.use(express.json()) // request body 파싱
+app.use(logger('tiny')) // Logger 설정
+
+app.use('/api/users', usersRouter)
+app.use('/api/books', booksRouter)
+
+// const Logger = function(req, res ,next){
+//     // req.requestTime = new Date()
+//     // console.log(`요청 시각 : ${req.requestTime}`)
+//     next()
+// }
+// app.use(Logger)
 
 app.get('/user', function(req, res, next){
     const array = books.map(item => {
@@ -189,40 +200,21 @@ app.delete('/user/:name/books/:bookname', function (req, res, next) {
     } else {
         const bookIndex = user.book.indexOf(Bookname)
 
-        if (bookIndex !== -1) {
-            user.book.splice(bookIndex, 1)
-            res.send(`${Bookname}가 삭제되었습니다.`)
-        } else {
-            res.send(`${Bookname}은(는) 존재하지 않는 책입니다.`)
-        }
+        user.book.splice(bookIndex, 1)
+        res.send(`${Bookname}가 삭제되었습니다.`)
     }
 
     next()
 })
 
-// app.delete('/user/:name/books/:bookname', function(req, res, next){
-//     const user = books.find(array => array.name === req.params.name)
-//     const Bookname = req.params.bookname
+app.use((req, res, next) => {   // 사용자가 요청한 페이지가 없는 경우 에러처리 (순서 중요)
+    res.status(404).send("Page Not Found")
+})
+app.use((err, req, res, next) => {  // 서버 내부 오류 처리
+    console.error(err.stack)
+    res.status(500).send("Internal Server Error")
+})
 
-//     if(!user){
-//         res.send('※ 존재하지 않는 회원정보 입니다.')
-//     }else{
-//         const bookIndex = user.book.indexOf(Bookname)
-
-//         user.book.splice(bookIndex, 1)
-//     }
-
-//     next()
-// })
-
-// app.post('/user', function(req, res, next){
-//     const newName = req.body.name
-//     const newBook = req.body.book
-//     books.push({name: newName, book: newBook})
-//     res.send(`name: ${newName} book: ${newBook}`)
-
-//     next()
-// })
 
 // 서버를 구동하고 브라우저 요청을 기다림
 // 코드 맨 하단에 있는것이 좋음
