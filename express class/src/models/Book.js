@@ -25,20 +25,22 @@ const bookSchema = new Schema({
         default: true,
     },
     loanDate: {
-        type: String,
-        default: function(){
-            if(this.loanStatus == true)
-            return moment().format('YYYY-MM-DD')
-        },
-        trim: true,
+        type: Date,
+        default: Date.now,
+        // default: function(){
+        //     if(this.loanStatus == true)
+        //     return moment().format('YYYY-MM-DD')
+        // },
+        // trim: true,
     },
     returnDate: {
-        type: String,
-        default: function(){
-            if(this.loanStatus == true)
-            return moment(this.loanDate).add(7, 'day').format('YYYY-MM-DD')
-        },
-        trim: true,
+        type: Date,
+        default: Date.now,
+        // default: function(){
+        //     if(this.loanStatus == true)
+        //     return moment(this.loanDate).add(7, 'day').format('YYYY-MM-DD')
+        // },
+        // trim: true,
     }, 
 }, { versionKey: false })
 

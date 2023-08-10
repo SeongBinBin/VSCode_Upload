@@ -18,7 +18,6 @@ const generateToken = (user) => {
 }
 
 const isAuth = (req, res, next) => {
-    console.log('권한')
     const bearerToken = req.headers.authorization
     if(!bearerToken){
         res.status(401).json({message: 'Token is not supplied'})
