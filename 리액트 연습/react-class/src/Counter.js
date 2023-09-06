@@ -4,13 +4,24 @@ import React, {Component} from "react";
 // 함수 컴포넌트 : props
 
 class Counter extends Component{
+    state = {
+        count: 0
+    }
+    componentDidMount(){
+        this.timerId = setInterval(() => {
+            this.setState({count: this.state.count + 1})
+        }, 1000)
+    }
+    componentWillUnmount(){
+        alert('해당 컴포넌트를 보이지 않게 하시겠어요?')
+        clearInterval(this.timerId)
+    }
     render(){
-        // this.props = {user: "SB"}
-        console.log(this.props)
+        const {count} = this.state
         return(
-            <>
-                <h1>Props 변경하기</h1>
-            </>
+            <div>
+                <h1>카운팅: {count}</h1>
+            </div>
         )
     }
 }

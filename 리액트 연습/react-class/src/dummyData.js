@@ -1,43 +1,48 @@
-function generateRandomId(n){
-    const nums = new Array(n).fill(0)
-    return nums.map(n => Math.floor(Math.random()*10)).join("")
-}
-function generateRandomString(n){
-    const alphabet = ["a", "s", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-    const str = new Array(n).fill('a')
-    return str.map(s => alphabet[Math.floor(Math.random()*alphabet.length)]).join("")
-}
-
 const dummyData = [
     {
-        videoId: generateRandomId(16), 
-        videoName: generateRandomString(10), 
-        videoLength: generateRandomId(6), 
-        videoDescription: generateRandomString(100)
+        word: 'apple',
+        meaning: '사과'
     },
     {
-        videoId: generateRandomId(16), 
-        videoName: generateRandomString(10), 
-        videoLength: generateRandomId(6), 
-        videoDescription: generateRandomString(100)
+        word: 'before',
+        meaning: '이전의'
     },
     {
-        videoId: generateRandomId(16), 
-        videoName: generateRandomString(10), 
-        videoLength: generateRandomId(6), 
-        videoDescription: generateRandomString(100)
+        word: 'clean',
+        meaning: '깨끗한'
     },
     {
-        videoId: generateRandomId(16), 
-        videoName: generateRandomString(10), 
-        videoLength: generateRandomId(6), 
-        videoDescription: generateRandomString(100)
+        word: 'dummy',
+        meaning: '가짜의'
     },
     {
-        videoId: generateRandomId(16), 
-        videoName: generateRandomString(10), 
-        videoLength: generateRandomId(6), 
-        videoDescription: generateRandomString(100)
-    }
+        word: 'emergent',
+        meaning: '긴급한'
+    },
+    {
+        word: 'famouse',
+        meaning: '유명한'
+    },
+    {
+        word: 'give',
+        meaning: '(~을) 주다'
+    },
+    {
+        word: 'humble',
+        meaning: '검소한'
+    },
+    {
+        word: 'ingrave',
+        meaning: '조각하다'
+    },
+    {
+        word: 'jungle',
+        meaning: '밀림숲'
+    },
+    {
+        word: 'korea',
+        meaning: '대한민국'
+    },
+  
 ]
-export default dummyData
+export default dummyData;
