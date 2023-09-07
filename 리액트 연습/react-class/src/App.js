@@ -1,47 +1,66 @@
 import React, { Component } from 'react';
 import './App.css';
 
+
+// import Nav from './Nav'
+
+// class App extends Component{
+//   render(){
+//     return(
+//       <div className='App'>
+//         <Nav></Nav>
+//       </div>
+//     )
+//   }  
+// }
+// 1번
+
+// import Modal from './Modal'
+// import Button from './Button'
+
 // class App extends Component{
 //   state = {
-//     count: []
+//     open: false,
+//     show: false
 //   }
-//   pickRandomNumber = (min, max) => {
-//     return Math.floor(Math.random() * (max-min+1)) + min
+//   openModal = () => {
+//     this.setState({open: true})
+//     this.setState({show: false})
 //   }
-//   createdNumber = () => {
-//     const numbers = []
-//     // for(let i = 0; i < 6; i++){
-//     //   const random = this.pickRandomNumber(1, 45)
-//     //   if(!numbers.includes(random)){
-//     //     numbers.push(random)
-//     //   }
-//     // }
-//     while (numbers.length < 6) {
-//       const random = this.pickRandomNumber(1, 45);
-//       if (!numbers.includes(random)) {
-//         numbers.push(random);
-//       }
-//     }
-//     this.setState({count: numbers})
+//   removeModal = () => {
+//     this.setState({open: false})
+//     this.setState({show: true})
 //   }
-//   componentDidMount(){
-//     this.timerId = setInterval(this.createdNumber, 1000);
+//   closeModal = () => {
+//     this.setState({open: false})
 //   }
 
 //   render(){
-//     const {count} = this.state
-//     console.log(count)
+//     const {open, show} = this.state
+//     const {openModal, closeModal, removeModal} = this 
+
 //     return(
 //       <div className='App'>
-//         <h1>로또번호 자동 생성기</h1>
-//         <h1>카운팅 : {count.join(', ')}</h1>
+//         <Button handleClick={openModal} color="tomato">Remove Todo</Button>
+//         <h1>{show? 'Removed Successfully !': ""}</h1>
+//         <Modal open={open}>
+//           <div className='Modal-header'>You want to remove this Todo ? </div>
+//           <div className='Modal-body'>
+//             <label>If you remove this Todo, you cannot see this gain later !</label>
+//           </div>
+//           <div className='Modal-footer'>
+//             <Button size="small" handleClick={removeModal}>Remove</Button>
+//             <Button size="small" handleClick={closeModal}>Close</Button>
+//           </div>
+//         </Modal>
 //       </div>
 //     )
 //   }
 // }
 // 2번
 
-// import dummyData from './dummyData';
+// import dummyData from './Component/dummyData';
+
 // class App extends Component{
 //   state = {
 //     count: 0
@@ -50,7 +69,7 @@ import './App.css';
 //     this.setState({count: this.state.count + 1})
 //   }
 //   componentDidMount(){
-//     this.countID = setInterval(this.increaseCount, 1000)
+//     this.countID = setInterval(this.increaseCount, 1500)
 //   }
 
 //   render(){
@@ -58,24 +77,42 @@ import './App.css';
 //     const words = dummyData[count % dummyData.length]
     
 //     return(
-//       <div className='word'>
-//         <h1>{words.word}</h1>
-//         <h3>{words.meaning}</h3>
+//       <div className='word_card'>
+//         <h1>Flash card</h1>
+//         <div className='word'>
+//           <h2>{words.word}</h2>
+//           <h2>{words.meaning}</h2>
+//         </div>
 //       </div>
 //     )
 //   }
 // }
 // 3번
 
-import Product from './Product';
-import Header from './Header';
+// import Input from './Input'
+
+// function App(){
+//   const handleChange = () => console.log('Typing something ... ')
+//   return(
+//     <div className='App'>
+//       <Input size="small" color="skyblue" handleChange={handleChange} disabled={true} label="Add Todo" placeholder="Type todo to add ..."/>
+//       <Input size="medium" color="tomato" label="입력창" placeholder="뭐든지 입력하세요 !"/>
+//       <Input size="large" color="grey" label="Remove Todo" placeholder="Type todo to remove ..."/>
+//     </div>
+//   )
+// }
+// 4번
+
+import Product from './Component/Product';
+import Header from './Component/Header';
 
 class App extends Component{
   constructor(props){
     super(props)
     this.state = {
       loading: true,
-      products: []
+      products: [],
+      searchText: ""
     }
   }
 
@@ -89,37 +126,31 @@ class App extends Component{
     })
   }
 
-  // 원본을 선택할지 정렬된 배열을 선택할지 상태를 변경하는 함수
-  sortProduct(){
-    const sort = true
-    
+  textSearch = (keyword) => {
+    this.setState({searchText: keyword})
   }
 
-
   render(){
-    const {loading, products} = this.state
-    const loadingStyle = {
-      position: 'absolute', 
-      left: '50%', 
-      top:'50%', 
-      transform: 'translate(-50%, -50%)', 
-      fontSize: '2rem'
-    }
+    const {loading, products, searchText} = this.state
+
+    const filteredProducts = products.filter((product) => {
+      return product.name.toLowerCase().includes(searchText.toLowerCase())
+    })
   
     if(loading){
       return(
-        <div style={loadingStyle}>
+        <div className='loading'>
           <h1>Loding ... </h1>
         </div>
       )
     }else{
       return(
-        <div className='root'>
+        <div className='test'>
           {/* <div className="header">
                 <button className="sort-btns">Price</button>
           </div> */}
-          <Header></Header>
-          {products.map(product => {
+          <Header onSearch={(keyword) => this.textSearch(keyword)}></Header>
+          {filteredProducts.map(product => {
             return(
               <Product
                 key={product.id}
@@ -135,6 +166,6 @@ class App extends Component{
     }
   }
 }
-// 4번
+// 5번
 
 export default App;
