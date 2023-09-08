@@ -1,6 +1,6 @@
 .Button {
     all: unset;
-    color: white;
+    color: #333;
     cursor: pointer;
     border-radius: 5px;
     font-weight: bold;
@@ -36,7 +36,7 @@
   
   /* 버튼의 배경색 설정 */
   .skyblue{
-    background:skyblue;
+    background:rgba(135, 206, 235, .6);
   }
   .skyblue:hover{
     background: skyblue;
