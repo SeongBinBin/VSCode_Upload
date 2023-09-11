@@ -1,6 +1,61 @@
 import React, { Component } from 'react';
 import './App.css';
 
+// class App extends Component{
+//     pageNum = 1 // 멤버변수 {state 값과의 차이점 : 변경되는 값이고, 화면에 보여지는 값}
+//     state = {
+//         keyword: '',
+//         photos: []
+//     }
+
+//     getPhotos = async () => {
+//         const data = await fetch(`https://api.unsplash.com/search/photos?page=${this.pageNum}&query=${this.state.keyword}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}&per_page=20`)
+//         const dataJson = await data.json()
+//         return dataJson.results
+//     }
+//     handleChange = (e) => {
+//         this.setState({keyword: e.target.value})    // 사용자가 입력한 텍스트로 keyword 상태 설정
+//     }
+//     searchPhotos = async (e) => {
+//         e.preventDefault()
+//         const photos = await this.getPhotos()
+//         this.setState({photos})
+//     }
+//     handleScroll = async () => {
+//         const photosContainer = document.querySelector('.App-photo-container')
+//         if(photosContainer.scrollTop + photosContainer.clientHeight === photosContainer.scrollHeight){  // 스크롤바를 맨 아래로 내렸을 때
+//             console.log('컨테이너 바닥')
+//             this.pageNum++  // 다음 페이지 조회하기
+//             const photos = await this.getPhotos()   // 다음 페이지 사진목록 가져오기
+//             this.setState({photos: [...this.state.photos, ...photos]})
+//         }
+//     }
+
+//     componentDidMount(){
+//         document.querySelector('.App-photo-container').addEventListener('scroll', this.handleScroll)
+//     }
+//     componentWillUnmount(){
+//         document.querySelector('.App-photo-container').removeEventListener('scroll', this.handleScroll)
+//     }
+
+//     render(){
+//         const {keyword, photos} = this.state
+
+//         return(
+//             <div className='App'>
+//                 <form className='App-search-container'>
+//                     <input type="text" value={keyword} placeholder="검색어 입력" onChange={this.handleChange}></input>
+//                     <button type='submit' onClick={this.searchPhotos}>검색</button>
+//                 </form>
+
+//                 <div className='App-photo-container'>
+//                     {photos.length === 0? <div>원하시는 사진을<br/>검색창에서 찾아보세요 ! </div>: photos.map(photo =>
+//                     <img key={photo.id} className="App-photo-item" src={photo.urls.small} alt={photo.alt_description}></img>)}
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
 
 // import Button from './Button'
 // import youtubeVideos from './Component/youtubeVideos';
@@ -152,75 +207,143 @@ import './App.css';
 // 5번
 
 
-import Sidebar from './Component/Sidebar'
-import Button from './Button';
-const menus = [ // 메뉴 데이터 (서버에서 전달받아서 보여주는 데이터)
-  {
-    icon: '♜',
-    title: 'HOME'
-  },
-  {
-    icon: '♞',
-    title: 'ABOUT'
-  },
-  {
-    icon: '☻',
-    title: 'SETTING'
-  },
-  {
-    icon: '♜',
-    title: 'HOME'
-  },
-  {
-    icon: '♞',
-    title: 'ABOUT'
-  },
-  {
-    icon: '☻',
-    title: 'SETTING'
-  }
-]
+// import Sidebar from './Component/Sidebar'
+// import Button from './Button';
+// const menus = [ // 메뉴 데이터 (서버에서 전달받아서 보여주는 데이터)
+//   {
+//     icon: '♜',
+//     title: 'HOME'
+//   },
+//   {
+//     icon: '♞',
+//     title: 'ABOUT'
+//   },
+//   {
+//     icon: '☻',
+//     title: 'SETTING'
+//   },
+//   {
+//     icon: '♜',
+//     title: 'HOME'
+//   },
+//   {
+//     icon: '♞',
+//     title: 'ABOUT'
+//   },
+//   {
+//     icon: '☻',
+//     title: 'SETTING'
+//   }
+// ]
+
+// class App extends Component{
+//   state = {
+//     toggle: false 
+//   }
+//   toggleMenu = () => {
+//     this.setState({ toggle: !this.state.toggle })
+//   }
+//   clickMenu = () => {
+//     this.setState({toggle: false})
+//   }
+//   closeSide = () => {
+//     const {toggle} = this.state
+//     if(toggle === false){
+//       this.setState({toggle: false})
+//       alert('test')
+//     }
+//   }
+
+//   componentDidMount(){
+//     window.addEventListener('click', this.closeSide)
+//   }
+//   componentWillUnmount(){
+//     window.removeEventListener('click', this.closeSide)
+//   }
+//   render(){
+//     const { toggle } = this.state 
+//     return (
+//       <div className='App'>
+//         <Button handleClick={this.toggleMenu}>사이드바 열기/닫기</Button>
+//         <Sidebar open={toggle}>
+//           {menus.map( (menu, id) => {
+//             return <div onClick={this.clickMenu} className='menu' key={id}>
+//               {menu.icon} {menu.title}
+//             </div>
+//           })}
+//         </Sidebar>
+//       </div>
+//     )
+//   }
+// }
+// 5번, 6번
+
+import Product from './Component/Product';
+import Header from './Component/Header';
+import './css/Header.css'
+import './css/Beauty.css'
 
 class App extends Component{
-  state = {
-    toggle: false 
-  }
-  toggleMenu = () => {
-    this.setState({ toggle: !this.state.toggle })
-  }
-  clickMenu = () => {
-    this.setState({toggle: false})
-  }
-  closeSide = () => {
-    const {toggle} = this.state
-    if(toggle === false){
-      this.setState({toggle: false})
-      alert('test')
+  constructor(props){
+    super(props)
+    this.state = {
+      loading: true,
+      products: [],
+      searchText: "",
+      show: true
     }
   }
-
   componentDidMount(){
-    window.addEventListener('click', this.closeSide)
+    fetch('http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline')
+    .then(res => res.json())
+    .then(result => {
+        const products = result
+        this.setState({loading: false, products})
+        this.loadingHide()
+    })
   }
-  componentWillUnmount(){
-    window.removeEventListener('click', this.closeSide)
+  textSearch = (keyword) => {
+    this.setState({searchText: keyword})
   }
+  loadingHide = () => {
+    setTimeout(() => {
+        this.setState({show: false})
+    }, 3000)
+  }
+
   render(){
-    const { toggle } = this.state 
-    return (
-      <div className='App'>
-        <Button handleClick={this.toggleMenu}>사이드바 열기/닫기</Button>
-        <Sidebar open={toggle}>
-          {menus.map( (menu, id) => {
-            return <div onClick={this.clickMenu} className='menu' key={id}>
-              {menu.icon} {menu.title}
+    console.log(this.state.show)
+    const {loading, products, searchText} = this.state
+    const filteredProducts = products.filter((product) => {
+      return product.name.toLowerCase().includes(searchText.toLowerCase())
+    })
+    if(!loading){
+      return(
+        <div className='test'>
+            <div className={`loading ${this.state.show? "": 'close'}`}>
+                <div>로딩 완료 !</div>
             </div>
-          })}
-        </Sidebar>
-      </div>
-    )
+
+            {/* <div className="header">
+                  <button className="sort-btns">Price</button>
+            </div> */}
+            <Header onSearch={(keyword) => this.textSearch(keyword)}></Header>
+            {filteredProducts.map(product => {
+              return(
+                <Product
+                  key={product.id}
+                  name={product.name}
+                  price={product.price}
+                  cover={product.image_link}
+                  description={product.description}
+                ></Product>
+            )
+        })}
+        </div>
+      )
+    }
   }
 }
-// 5번, 6번
+// 
 
 export default App;
