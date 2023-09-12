@@ -1,61 +1,357 @@
-import React, { Component } from 'react';
+// import React, { useEffect, useState } from 'react';
+import React, {Component} from 'react';
 import './App.css';
 
-// class App extends Component{
-//     pageNum = 1 // 멤버변수 {state 값과의 차이점 : 변경되는 값이고, 화면에 보여지는 값}
-//     state = {
-//         keyword: '',
-//         photos: []
-//     }
+// import Modal from './Modal'
+// import Button from './Button'
+// function App(){
+//   const [open, setOpen] = useState(false)
 
-//     getPhotos = async () => {
-//         const data = await fetch(`https://api.unsplash.com/search/photos?page=${this.pageNum}&query=${this.state.keyword}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}&per_page=20`)
-//         const dataJson = await data.json()
-//         return dataJson.results
-//     }
-//     handleChange = (e) => {
-//         this.setState({keyword: e.target.value})    // 사용자가 입력한 텍스트로 keyword 상태 설정
-//     }
-//     searchPhotos = async (e) => {
-//         e.preventDefault()
-//         const photos = await this.getPhotos()
-//         this.setState({photos})
-//     }
-//     handleScroll = async () => {
-//         const photosContainer = document.querySelector('.App-photo-container')
-//         if(photosContainer.scrollTop + photosContainer.clientHeight === photosContainer.scrollHeight){  // 스크롤바를 맨 아래로 내렸을 때
-//             console.log('컨테이너 바닥')
-//             this.pageNum++  // 다음 페이지 조회하기
-//             const photos = await this.getPhotos()   // 다음 페이지 사진목록 가져오기
-//             this.setState({photos: [...this.state.photos, ...photos]})
-//         }
-//     }
+//   const openModal = () => {
+//     setOpen(true)
+//   }
+//   const closeModal = () => {
+//     setOpen(false)
+//   }
 
-//     componentDidMount(){
-//         document.querySelector('.App-photo-container').addEventListener('scroll', this.handleScroll)
-//     }
-//     componentWillUnmount(){
-//         document.querySelector('.App-photo-container').removeEventListener('scroll', this.handleScroll)
-//     }
-
-//     render(){
-//         const {keyword, photos} = this.state
-
-//         return(
-//             <div className='App'>
-//                 <form className='App-search-container'>
-//                     <input type="text" value={keyword} placeholder="검색어 입력" onChange={this.handleChange}></input>
-//                     <button type='submit' onClick={this.searchPhotos}>검색</button>
-//                 </form>
-
-//                 <div className='App-photo-container'>
-//                     {photos.length === 0? <div>원하시는 사진을<br/>검색창에서 찾아보세요 ! </div>: photos.map(photo =>
-//                     <img key={photo.id} className="App-photo-item" src={photo.urls.small} alt={photo.alt_description}></img>)}
-//                 </div>
-//             </div>
-//         )
-//     }
+//   return(
+//     <div className='App'>
+//       <Button handleClick={openModal}>Add Todo</Button>
+//       <Modal open={open}>
+//         <div className='header'>You Want To Add New Todo ? </div>
+//         <div className='body'>
+//           <label>todo name : <input type="text"></input></label><br/>
+//           <label>todo description : <input type="text"></input></label>
+//         </div>
+//         <div className='footer'>
+//           <Button size="small">Add</Button>
+//           <Button size="small" handleClick={closeModal}>Close</Button>
+//         </div>
+//       </Modal>
+//     </div>
+//   )
 // }
+// 0번
+
+// function App(){
+//   const [count, setCount] = useState(0)
+
+//   const showUI = (cnt) => {
+//     let ui = null
+//     switch(cnt){
+//       case 0:
+//         ui = <h1>Home</h1>
+//         break;
+//       case 1:
+//         ui = <h1>About</h1>
+//         break;
+//       case 2:
+//         ui = <h1>Detail</h1>
+//         break;
+//       default:
+//         ui = <h1>Not Found</h1>
+//     }
+//     return ui
+//   }
+
+//   const increase = () => {
+//     setCount(count + 1)
+//   }
+//   return(
+//     <>
+//       {showUI(count)}
+//       <button type='button' onClick={increase}>카운팅</button>
+//     </>
+//   )
+// }
+// 1번
+
+// import ImageData from './Component/ImageData'
+// function App(){
+//   const [count, setCount] = useState(0)
+
+//   const animal = ImageData[count % ImageData.length]
+//   useEffect(() => {
+//     const increaseCount = () => {
+//       clearTimeout(timerID)
+//       setCount(count + 1)
+//     }
+//     const timerID = setTimeout(increaseCount, 1000)
+//     return () => {
+//       clearTimeout(timerID)
+//     }
+//   }, [count])
+
+//   return(
+//     <div className='App'>
+//       <h1>Image Gallery</h1>
+//       <img src={animal.src} alt={animal.title}></img>
+//       <p>{animal.title}</p>
+//     </div>
+//   )
+// }
+// 2번
+
+// import Movie from './Component/Movie'
+// function App(){
+//   const [loading, setLoading] = useState(true)
+//   const [movies, setMovies] = useState([])
+
+//   useEffect(() => {
+//     fetch('https://yts.mx/api/v2/list_movies.json?limit=12')
+//     .then(res => res.json())
+//     .then(result => {
+//       const {data: {movies}} = result
+//       setMovies(movies)
+//       setLoading(false)
+//     })
+//   }, [])
+
+//   if(loading){
+//     return(
+//       <div style={{position: 'absolute', 
+//       left: '50%', 
+//       top:'50%', 
+//       transform: 'translate(-50%, -50%)', 
+//       fontSize: '2rem'}}>
+//         <h1>Loading ... </h1>
+//       </div>
+//     )
+//   }else{
+//     return(
+//       <div style={{display: 'flex',
+//       flexWrap: 'wrap',
+//       justifyContent: 'center',
+//       alignItems: 'center',
+//       width: '60%',
+//       margin: '100px auto',
+//       textAlign: 'center'}}>
+//         {movies.map(movie => {
+//           return(
+//             <Movie key={movie.id} title={movie.title} genres={movie.genres} cover={movie.medium_cover_image} summary={movie.summary}></Movie>
+//           )
+//         })}
+//       </div>
+//     )
+//   }
+// }
+// 3번
+
+// function App(){
+//   const [numbers, setNumbers] = useState('')
+
+//   const pickRandomNumber = (min, max) => {
+//     return Math.floor(Math.random() * (max - min + 1) + min)
+//   }
+//   const isDuplicated = (numbers, picked) => {
+//     return numbers.find(num => num === picked)
+//   }
+//   const getLottoNum = (numbers) => {
+//     const picked = pickRandomNumber(1, 45)
+//     const duplicatedNum = isDuplicated(numbers, picked)
+//     if(duplicatedNum){
+//       getLottoNum(numbers)
+//     }else{
+//       numbers.push(picked)
+//     }
+//   }
+
+//   const showRandomNumber = () => {
+//     const numbers = []
+
+//     while(numbers.length < 6){
+//       getLottoNum(numbers)
+//     }
+
+//     setNumbers(numbers.join(', '))
+//   }
+
+//   useEffect(() => {
+//     const timerID = setTimeout(showRandomNumber, 1000)
+//     return () => {
+//       clearTimeout(timerID)
+//     }
+//   }, [numbers])
+
+//   return(
+//     <div className='App'>
+//       <h1>로또번호 자동 생성기</h1>
+//       <h1>번호 : {numbers}</h1>
+//     </div>
+//   )
+// }
+// 4번
+
+// import Movie from './Component/Movie'
+// function App(){
+//   const [movies, setMovies] = useState([])
+
+//   useEffect(() => {
+//     fetch('https://yts.mx/api/v2/list_movies.json?limit=12')
+//     .then(res => res.json())
+//     .then(result => {
+//       const {data: {movies}} = result
+//       setMovies(movies)
+//     })
+//   }, [])
+
+//   return(
+//     <div className='App'>
+//       <h1>영화목록</h1>
+//       {movies.map((movie, id) => {
+//         // return(
+//         //   <div key={id}>
+//         //     <h2>{movie.title}</h2>
+//         //     <img src={movie.medium_cover_image} alt={movie.title}></img>
+//         //     <h4>{movie.genres.join(", ")}</h4>
+//         //     <p>------------------------------------------</p>
+//         //   </div>
+//         // )
+//         return(
+//           <Movie
+//             key={id}
+//             title={movie.title}
+//             genres={movie.genres}
+//             cover={movie.medium_cover_image}
+//           ></Movie>
+//         )
+//       })}
+//     </div>
+//   )
+// }
+// 5번
+
+// import wordData from './Component/dummyData'
+// import Button from './Button'
+// function App(){
+//   const [words, setWords] = useState(wordData)
+
+//   const handleRemove = (id, e) => {
+//     const word = e.target.previousSibling.innerText
+//     alert(`You want to delete word - '${word}' ? `)
+//     const newwords = words.filter((w, index) => index !== id)
+//     setWords(newwords)
+//   }
+
+//   return(
+//     <div>
+//       <h1 style={{textAlign: 'center'}}>Word List</h1>
+//       {words.map((w, id) => {
+//         return(
+//           <div key={id} style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+//             <h2>{w.word}</h2>
+//             <Button size="small" type="button" handleClick={(e) => handleRemove(id, e)}>DELETE</Button>
+//           </div>
+//         )
+//       })}
+//     </div>
+//   )
+// }
+// 6번
+
+// import images from './Component/ImageData'
+// import Button from './Button'
+// function App(){
+//   const [index, setIndex] = useState(0)
+
+//   const decreaseIndex = () => {
+//     const nextIndex = index - 1
+//     setIndex((nextIndex < 0)? images.length - 1: nextIndex)
+//   }
+//   const increaseIndex = () => {
+//     const nextIndex = index + 1
+//     setIndex((nextIndex > images.length - 1)? 0: nextIndex)
+//   }
+
+//   const path = images[index].src
+//   const title = images[index].title
+//   return(
+//     <div className='App'>
+//       <div className='img-container'>
+//         <img src={path} alt={title}></img>
+//       </div>
+
+//       <div className='control-btns'>
+//         <Button handleClick={decreaseIndex}>Prev</Button>
+//         <Button handleClick={increaseIndex}>Next</Button>
+//       </div>
+//     </div>
+//   )
+// }
+// 7번
+
+// import Button from './Button'
+// function App(){
+//   const [id, setID] = useState('')
+//   const [password, setPassword] = useState('')
+
+//   const handleChange = (e) => {
+//     const {name, value} = e.target
+
+//     if(name === "id"){
+//       setID(value)
+//     }else if(name === "password"){
+//       setPassword(value)
+//     }
+//   }
+//   const login = (e) => {
+//     e.preventDefault()
+
+//     if(id === '' || password === ''){
+//       console.log('login failed')
+//     }else if(id !== '' || password !== ''){
+//       console.log('login')
+//     }
+//   }
+
+//   return(
+//     <div className='App'>
+//       <form>
+//         <label>ID<input type="text" placeholder="아이디를 입력하세요." name="id" value={id} onChange={handleChange}></input></label>
+//         <label>PASSWORD<input type="password" placeholder="비밀번호를 입력하세요." name="password" value={password} onChange={handleChange}></input></label>
+//         <div className='login-btn'><Button handleClick={login}>Login</Button></div>
+//       </form>
+//     </div>
+//   )
+// }
+// 8번
+
+// import Button from './Button'
+// function App(){
+//   const [fileName, setFileName] = useState('')
+//   const [imgSrc, setImgSrc] = useState('')
+//   const fileInput = React.createRef()
+
+//   const isValid = (type) => {
+//     return type === 'image'
+//   }
+//   const handleChange = (e) => {
+//     const file = e.target.files[0]
+//     const imgSrc = URL.createObjectURL(file)
+
+//     if(isValid(file.type.split('/')[0])){
+//       setFileName(file.name)
+//       setImgSrc(imgSrc)
+//     }else{
+//       setFileName('File is not valid type ! ')
+//       setImgSrc('')
+//     }
+//   }
+
+//   const openFileWindow = () => {
+//     fileInput.current.click()
+//   }
+
+//   return(
+//     <div className='App'>
+//       <h1>{fileName}</h1>
+//       {imgSrc !== '' && <img src={imgSrc} alt="preview-img" width="300px" height="400px"></img>}
+//       <input className='Upload' type="file" onChange={handleChange} ref={fileInput}></input>
+//       <Button handleClick={openFileWindow}>Upload</Button>
+//     </div>
+//   )
+// }
+// 9번
 
 // import Button from './Button'
 // import youtubeVideos from './Component/youtubeVideos';
@@ -278,72 +574,87 @@ import './App.css';
 // }
 // 5번, 6번
 
-import Product from './Component/Product';
-import Header from './Component/Header';
-import './css/Header.css'
-import './css/Beauty.css'
+// import Product from './Component/Product';
+// import Header from './Component/Header';
+// import './css/Header.css'
+// import './css/Beauty.css'
 
-class App extends Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      loading: true,
-      products: [],
-      searchText: "",
-      show: true
-    }
-  }
-  componentDidMount(){
-    fetch('http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline')
-    .then(res => res.json())
-    .then(result => {
-        const products = result
-        this.setState({loading: false, products})
-        this.loadingHide()
-    })
-  }
-  textSearch = (keyword) => {
-    this.setState({searchText: keyword})
-  }
-  loadingHide = () => {
-    setTimeout(() => {
-        this.setState({show: false})
-    }, 3000)
-  }
+// class App extends Component{
+//   constructor(props){
+//     super(props)
+//     this.state = {
+//       loading: true,
+//       products: [],
+//       searchText: "",
+//       show: true,
+//       scrollToTop: true
+//     }
+//   }
+//   componentDidMount(){
+//     fetch('http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline')
+//     .then(res => res.json())
+//     .then(result => {
+//         const products = result
+//         this.setState({loading: false, products})
+//         this.loadingHide()
+//     })
+//     window.addEventListener('scroll', this.handleScroll)
+//     // this.state.scrollToTop('click', this.scrollTop)
+//   }
+//   textSearch = (keyword) => {
+//     this.setState({searchText: keyword})
+//   }
+//   loadingHide = () => {
+//     setTimeout(() => {
+//         this.setState({show: false})
+//     }, 3000)
+//   }
 
-  render(){
-    console.log(this.state.show)
-    const {loading, products, searchText} = this.state
-    const filteredProducts = products.filter((product) => {
-      return product.name.toLowerCase().includes(searchText.toLowerCase())
-    })
-    if(!loading){
-      return(
-        <div className='test'>
-            <div className={`loading ${this.state.show? "": 'close'}`}>
-                <div>로딩 완료 !</div>
-            </div>
+//   handleScroll = () => {
+//     if (window.scrollY > 300) {
+//       this.setState({scrollToTop: true})
+//     } else {
+//       this.setState({scrollToTop: false})
+//     }
+//   }
+//   // scrollTop = () => {
+//   //   window.scrollY === 0
+//   // }
 
-            {/* <div className="header">
-                  <button className="sort-btns">Price</button>
-            </div> */}
-            <Header onSearch={(keyword) => this.textSearch(keyword)}></Header>
-            {filteredProducts.map(product => {
-              return(
-                <Product
-                  key={product.id}
-                  name={product.name}
-                  price={product.price}
-                  cover={product.image_link}
-                  description={product.description}
-                ></Product>
-            )
-        })}
-        </div>
-      )
-    }
-  }
-}
+//   render(){
+//     console.log(this.state.show)
+//     const {loading, products, searchText} = this.state
+//     const filteredProducts = products.filter((product) => {
+//       return product.name.toLowerCase().includes(searchText.toLowerCase())
+//     })
+//     if(!loading){
+//       return(
+//         <div className='test'>
+//             <div className={`loading ${this.state.show? "": 'close'}`}>
+//                 <div>로딩 완료 !</div>
+//             </div>
+
+//             {/* <div className="header">
+//                   <button className="sort-btns">Price</button>
+//             </div> */}
+//             <Header onSearch={(keyword) => this.textSearch(keyword)}></Header>
+//             {filteredProducts.map(product => {
+//               return(
+//                 <Product
+//                   key={product.id}
+//                   name={product.name}
+//                   price={product.price}
+//                   cover={product.image_link}
+//                   description={product.description}
+//                 ></Product>
+//             )
+//         })}
+//         <p className={this.state.scrollToTop? this.state.scrollToTop: 'close'} style={{position: 'fixed',bottom: '10px', left: '10px'}}>scroll to top</p>
+//         </div>
+//       )
+//     }
+//   }
+// }
 // 
 
 export default App;

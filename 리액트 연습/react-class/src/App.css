@@ -84,3 +84,38 @@
 .App-photo-container::-webkit-scrollbar-track {
   background: rgba(33, 122, 244, .1); 
 } */
+
+/* .App{
+  width: 300px;
+  clear: both;
+  margin: 200px auto;
+}
+.App label{
+  color:lightgreen;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.App input { 
+  width: 100%;
+  height: 30px;
+  clear: both;
+
+  border: 2px solid lightgreen;
+  border-radius: 15px;
+  outline: none;
+  padding: 10px;
+  color: lightgreen;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.App input::placeholder{
+  color: lightgreen;
+}
+.login-btn{
+  width: 320px;
+  display: flex;
+  justify-content: flex-end;
+} */
+
+/* .App{ width: 30%; margin: 200px auto; } .Upload{ display: none; } */

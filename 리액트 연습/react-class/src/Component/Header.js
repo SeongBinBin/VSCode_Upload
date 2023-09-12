@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dropdown from "./Dropdown";
 
 function Header({onSearch}){
@@ -18,22 +18,19 @@ function Header({onSearch}){
     
     const handleMouseOut = () => {
         setIsHovering(false)
-    }
+    }   
 
-    // const movingScroll = () => {
-    //     if (window.scrollY > 100) {
-    //         // const header = document.querySelector('.header')
-    //         // header.classList.add('header_scroll')
-    //         this.setState({this.state.shadow: true})
-    //     }
-    // }
     const handleScroll = () => {
         if (window.scrollY > 100) {
-          setShadow(true);
+          setShadow(true)
         } else {
-          setShadow(false);
+          setShadow(false)
         }
-      }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+    }, [])
 
     return(
         <div className={`header ${shadow? 'shadow': ''}`}>
