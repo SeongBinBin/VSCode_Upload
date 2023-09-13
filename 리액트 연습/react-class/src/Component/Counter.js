@@ -1,28 +1,33 @@
-import React, {Component} from "react";
+import React, {useState, useReducer} from "react";
 
-// 클래스 컴포넌트 : this.props
-// 함수 컴포넌트 : props
+function reducer(state, action){    // reducer : 사용자 액션(인터렉션)의 종류에 따라서 현재 state 값을 변경하는 함수
+    // state : 현재상태, action : 사용자 액션의 종류(객체형태)
+    switch(action.type){
+        case 'INCREMENT':
+            return state + 1;
+        case 'DECREMENT':
+            return state - 1;
+        default:
+            return state;
+    }
+}
 
-class Counter extends Component{
-    state = {
-        count: 0
+function Counter(){
+    const [number, dispatch] = useReducer(reducer, 0)
+
+    const onIncrease = () => {
+        dispatch({type: 'INCREMENT'})
     }
-    componentDidMount(){
-        this.timerId = setInterval(() => {
-            this.setState({count: this.state.count + 1})
-        }, 1000)
+    const onDecrease = () => {
+        dispatch({type: 'DECREMENT'})
     }
-    componentWillUnmount(){
-        alert('해당 컴포넌트를 보이지 않게 하시겠어요?')
-        clearInterval(this.timerId)
-    }
-    render(){
-        const {count} = this.state
-        return(
-            <div>
-                <h1>카운팅: {count}</h1>
-            </div>
-        )
-    }
+
+    return(
+        <div>
+            <h1>{number}</h1>
+            <button onClick={onIncrease}>+1</button>
+            <button onClick={onDecrease}>-1</button>
+        </div>
+    )
 }
 export default Counter
